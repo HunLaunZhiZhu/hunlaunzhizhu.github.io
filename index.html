@@ -1,25 +1,103 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=https://hunluanzhizhu.github.io">
-  <title>Redirecting...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>正在跳转...</title>
+
+    <!-- 禁用 JavaScript 时的备用跳转 -->
+    <meta http-equiv="refresh"
+          content="2;url=https://hunluanzhizhu.github.io/">
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            color: #333333;
+            font-family: system-ui, sans-serif;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-<div id="tip"></div>
-<script>
-// 获取浏览器语言
-const lang = navigator.language || navigator.userLanguage;
-const tipEl = document.getElementById('tip');
+    <div class="message" id="message">
+        正在跳转...
+    </div>
 
-if (lang.startsWith('zh')) {
-  tipEl.innerHTML = `正在跳转，如果没有自动跳转，请点击 <a href="https://hunluanzhizhu.github.io">这里</a>`;
-} else {
-  tipEl.innerHTML = `Redirecting, if not auto redirect, click <a href="https://hunluanzhizhu.github.io">here</a>`;
-}
+    <script>
+        (function () {
+            "use strict";
 
-// JS跳转
-window.location.replace("https://hunluanzhizhu.github.io");
-</script>
+            const target =
+                "https://hunluanzhizhu.github.io/";
+
+            // 获取浏览器首选语言
+            const language = (
+                navigator.languages?.[0] ||
+                navigator.language ||
+                "en"
+            ).toLowerCase();
+
+            // 多语言翻译
+            const translations = {
+                "zh-cn": "正在跳转...",
+                "zh-sg": "正在跳转...",
+                "zh-tw": "正在跳轉...",
+                "zh-hk": "正在跳轉...",
+                "en": "Redirecting...",
+                "ja": "リダイレクトしています...",
+                "ko": "이동 중...",
+                "fr": "Redirection en cours...",
+                "de": "Weiterleitung läuft...",
+                "es": "Redirigiendo...",
+                "ru": "Перенаправление...",
+                "it": "Reindirizzamento in corso...",
+                "pt": "Redirecionando...",
+                "ar": "جارٍ إعادة التوجيه...",
+                "hi": "रीडायरेक्ट किया जा रहा है..."
+            };
+
+            // 优先匹配完整语言代码
+            let text = translations[language];
+
+            // 再匹配基础语言代码
+            if (!text) {
+                const base = language.split("-")[0];
+
+                if (base === "zh") {
+                    text = "正在跳转...";
+                } else {
+                    text = translations[base];
+                }
+            }
+
+            // 未支持的语言默认使用英语
+            text = text || translations.en;
+
+            // 更新页面语言和提示文字
+            document.documentElement.lang = language;
+            document.title = text;
+            document.getElementById("message")
+                .textContent = text;
+
+            // 显示提示后自动跳转
+            setTimeout(function () {
+                window.location.replace(target);
+            }, 500);
+        })();
+    </script>
 </body>
 </html>
