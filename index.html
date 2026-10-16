@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=https://hunluanzhizhu.github.io">
+  <title>Redirecting...</title>
+</head>
+<body>
+<div id="tip"></div>
+<script>
+// 获取浏览器语言
+const lang = navigator.language || navigator.userLanguage;
+const tipEl = document.getElementById('tip');
+
+if (lang.startsWith('zh')) {
+  tipEl.innerHTML = `正在跳转，如果没有自动跳转，请点击 <a href="https://hunluanzhizhu.github.io">这里</a>`;
+} else {
+  tipEl.innerHTML = `Redirecting, if not auto redirect, click <a href="https://hunluanzhizhu.github.io">here</a>`;
+}
+
+// JS跳转
+window.location.replace("https://hunluanzhizhu.github.io");
+</script>
+</body>
+</html>
